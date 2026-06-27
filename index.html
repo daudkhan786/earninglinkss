@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>EarningLinks — Shorten & Earn Money</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<!-- Adsterra Ad #1 (Popunder / Global) -->
+<script src="https://pl30100368.effectivecpmnetwork.com/67/7b/6b/677b6b215362926d5383fb247add8be3.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -19,7 +21,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 #authPage.active{display:flex;align-items:center;justify-content:center;padding:40px 24px;background:linear-gradient(135deg,#1e1b4b,#312e81)}
 #dashPage.active{display:flex;}
 #adminPage.active{display:flex;}
-#redirectPage.active{display:flex;align-items:center;justify-content:center;color:white;padding:24px;background:linear-gradient(135deg,#1e1b4b,#312e81)}
+#redirectPage.active{display:flex;align-items:center;justify-content:center;color:white;padding:0;background:linear-gradient(135deg,#1e1b4b,#312e81)}
 .land-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1)}
 .land-logo{font-size:1.4rem;font-weight:800;letter-spacing:-0.5px}
 .land-logo span{color:#06b6d4}
@@ -139,7 +141,7 @@ tr:last-child td{border-bottom:none}
 .rd-progress-bg{background:rgba(255,255,255,0.1);border-radius:100px;height:6px;margin-bottom:20px;overflow:hidden}
 .rd-progress{height:100%;background:linear-gradient(90deg,#06b6d4,#4f46e5);border-radius:100px;width:100%;transition:width 1s linear}
 .rd-skip{display:none;padding:10px 24px;border-radius:10px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:0.88rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
-.admin-sidebar{width:260px;background:linear-gradient(180deg,#1c0a00,#7c2d12);color:white;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:200;}
+.admin-sidebar{width:260px;background:linear-gradient(180deg,#1c0a00,#7c2d12);color:white;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:200;transition:transform 0.3s}
 .admin-logo{padding:22px 24px;border-bottom:1px solid rgba(255,255,255,0.1);font-size:1.1rem;font-weight:800}
 .admin-logo span{color:#fb923c}
 .admin-badge{background:rgba(251,146,60,0.2);color:#fb923c;padding:2px 8px;border-radius:6px;font-size:0.7rem;font-weight:700;margin-left:8px;letter-spacing:0.05em}
@@ -198,6 +200,8 @@ tr:last-child td{border-bottom:none}
 .filter-input:focus{border-color:#ea580c}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e1b4b;color:white;padding:12px 24px;border-radius:12px;font-size:0.88rem;font-weight:600;opacity:0;transition:all 0.3s;z-index:9999;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:150}
+.admin-overlay.open{display:block}
 @media(max-width:768px){
 .main-content{margin-left:0;padding:16px}
 .admin-content{margin-left:0;padding:16px}
@@ -394,6 +398,7 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <div id="adminPage" class="page">
+<div class="admin-overlay" id="adminOverlay" onclick="closeAdminSidebar()"></div>
 <div class="admin-sidebar" id="adminSidebar">
 <div class="admin-logo">Earning<span>Links</span><span class="admin-badge">ADMIN</span></div>
 <nav class="admin-nav">
@@ -438,13 +443,18 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <div id="redirectPage" class="page">
-<div class="rd-box">
+<div style="width:100%;max-width:700px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 16px">
+<div style="width:100%;display:flex;justify-content:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:10px;min-height:90px">
+<script src="https://pl30100369.effectivecpmnetwork.com/5a/9b/e5/5a9be56f5917d11b09bb4f033059701e.js"></script>
+</div>
+<div class="rd-box" style="margin:0">
 <div class="rd-logo">Earning<span>Links</span></div>
-<div class="rd-countdown" id="rdCountdown">5</div>
+<div class="rd-countdown" id="rdCountdown">15</div>
 <div class="rd-title">Aapko redirect kiya ja raha hai...</div>
 <div class="rd-dest" id="redirectDest"></div>
 <div class="rd-progress-bg"><div class="rd-progress" id="rdProgress"></div></div>
 <button class="rd-skip" id="skipBtn" onclick="doFinalRedirect()">Skip →</button>
+</div>
 </div>
 </div>
 
@@ -468,7 +478,11 @@ function saveDB(){localStorage.setItem('eldb',JSON.stringify(db));}
 function saveUser(){localStorage.setItem('eluser',JSON.stringify(currentUser));}
 function loadSavedUser(){
   const u=localStorage.getItem('eluser');
-  if(u){currentUser=JSON.parse(u);if(currentUser.isAdmin){showAdminDash();return;}if(db.users[currentUser.id]){currentUser=db.users[currentUser.id];showDash();}else localStorage.removeItem('eluser');}
+  if(!u)return;
+  const saved=JSON.parse(u);
+  if(saved.isAdmin){currentUser=saved;showAdminDash();return;}
+  if(db.users[saved.id]){currentUser=db.users[saved.id];showDash();}
+  else localStorage.removeItem('eluser');
 }
 function genCode(n=7){const c='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';let r='';for(let i=0;i<n;i++)r+=c[Math.floor(Math.random()*c.length)];return r;}
 function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');}
@@ -503,7 +517,9 @@ function updateSidebar(){if(!currentUser)return;document.getElementById('sidebar
 function showPanel(p){
   document.querySelectorAll('.panel').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
-  document.getElementById('panel-'+p).classList.add('active');document.getElementById('nav-'+p).classList.add('active');closeSidebar();
+  document.getElementById('panel-'+p).classList.add('active');
+  document.getElementById('nav-'+p).classList.add('active');
+  closeSidebar();
   if(p==='dashboard')loadDashboard();if(p==='links')loadMyLinks();if(p==='earnings')loadEarnings();if(p==='withdraw')loadWithdraw();if(p==='referral')loadReferral();if(p==='profile')loadProfile();
 }
 function refreshUser(){currentUser=db.users[currentUser.id];}
@@ -573,8 +589,8 @@ function showRedirectPage(code){
   redirectTarget=link.longUrl;showPage('redirectPage');document.getElementById('redirectDest').textContent=link.longUrl;
   db.links[code].clicks=(link.clicks||0)+1;const earn=3/1000;
   db.links[code].earned=(link.earned||0)+earn;db.users[link.userId].balance=(db.users[link.userId].balance||0)+earn;db.users[link.userId].totalEarned=(db.users[link.userId].totalEarned||0)+earn;saveDB();
-  let sec=5;const numEl=document.getElementById('rdCountdown');const progEl=document.getElementById('rdProgress');const skipBtn=document.getElementById('skipBtn');
-  rdTimer=setInterval(()=>{sec--;numEl.textContent=sec;progEl.style.width=((sec/5)*100)+'%';if(sec<=0){clearInterval(rdTimer);doFinalRedirect();}if(sec<=2)skipBtn.style.display='block';},1000);
+  let sec=15;const numEl=document.getElementById('rdCountdown');const progEl=document.getElementById('rdProgress');const skipBtn=document.getElementById('skipBtn');
+  rdTimer=setInterval(()=>{sec--;numEl.textContent=sec;progEl.style.width=((sec/15)*100)+'%';if(sec<=0){clearInterval(rdTimer);doFinalRedirect();}if(sec<=3)skipBtn.style.display='block';},1000);
 }
 function doFinalRedirect(){clearInterval(rdTimer);if(redirectTarget)window.location.href=redirectTarget;}
 function showAdminDash(){showPage('adminPage');showAdminPanel('overview');}
@@ -582,6 +598,7 @@ function showAdminPanel(p){
   document.querySelectorAll('.admin-panel').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.admin-nav-item').forEach(el=>el.classList.remove('active'));
   document.getElementById('apanel-'+p).classList.add('active');document.getElementById('anav-'+p).classList.add('active');
+  closeAdminSidebar();
   if(p==='overview')loadAdminOverview();if(p==='withdrawals')loadAdminWithdrawals();if(p==='users')loadAdminUsers();if(p==='adminlinks')loadAdminLinks();
 }
 function loadAdminOverview(){
@@ -649,7 +666,8 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 function showMsg(el,msg,green=false){el.textContent=msg;el.className='auth-msg show'+(green?' green':'');setTimeout(()=>el.classList.remove('show'),4000);}
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('open');}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');}
-function openAdminSidebar(){document.getElementById('adminSidebar').classList.add('open');}
+function openAdminSidebar(){document.getElementById('adminSidebar').classList.add('open');document.getElementById('adminOverlay').classList.add('open');}
+function closeAdminSidebar(){document.getElementById('adminSidebar').classList.remove('open');document.getElementById('adminOverlay').classList.remove('open');}
 const params=new URLSearchParams(window.location.search);
 if(params.get('r'))showRedirectPage(params.get('r'));
 else loadSavedUser();
