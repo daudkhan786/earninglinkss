@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="monetag" content="fa0d4fa31722a1e5055d2369e6c0ec3e">
 <title>EarningLinks — Shorten & Earn Money</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
@@ -107,413 +108,333 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .panel{display:none}
 .panel.active{display:block}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:28px}
-.stat-card{background:var(--card);border-radius:16px;padding:22px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.stat-card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
-.sc-purple{background:linear-gradient(135deg,rgba(79,70,229,0.15),rgba(124,58,237,0.15))}
-.sc-green{background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(5,150,105,0.15))}
-.sc-blue{background:linear-gradient(135deg,rgba(6,182,212,0.15),rgba(8,145,178,0.15))}
-.sc-yellow{background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(217,119,6,0.15))}
-.stat-card-val{font-size:1.9rem;font-weight:800;margin-bottom:4px}
-.stat-card-label{color:var(--muted);font-size:0.82rem}
-.shortener-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.card-title{font-size:1rem;font-weight:700;margin-bottom:16px}
-.short-input-row{display:flex;gap:10px}
-.short-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text)}
-.short-input:focus{border-color:var(--primary)}
-.short-btn{padding:12px 22px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;border:none;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
-.result-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:13px 16px;margin-top:12px;flex-wrap:wrap;display:none}
-.result-row.show{display:flex}
-.result-link{color:var(--green);font-weight:700;font-size:0.92rem;word-break:break-all}
-.copy-btn{background:var(--green);color:white;border:none;border-radius:8px;padding:7px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
-.table-card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:24px}
-.table-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--border)}
-.table-head h3{font-size:0.95rem;font-weight:700}
-table.data-table{width:100%;border-collapse:collapse}
-table.data-table th{background:var(--bg);padding:11px 20px;text-align:left;font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
-table.data-table td{padding:13px 20px;font-size:0.88rem;border-bottom:1px solid var(--border);vertical-align:middle}
-table.data-table tr:last-child td{border-bottom:none}
-.link-text{color:var(--primary);font-weight:600;word-break:break-all;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:0.75rem;font-weight:700}
-.badge-green{background:rgba(16,185,129,0.12);color:var(--green)}
-.badge-blue{background:rgba(6,182,212,0.12);color:var(--accent)}
-.badge-red{background:rgba(239,68,68,0.12);color:var(--red)}
-.action-btn{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 11px;font-size:0.78rem;cursor:pointer;transition:all 0.2s}
-.action-btn:hover{border-color:var(--primary);color:var(--primary)}
-.withdraw-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);max-width:500px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.balance-big{font-size:2.5rem;font-weight:800;color:var(--green);margin:12px 0}
+.stat-card{background:var(--card);border-radius:16px;padding:22px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid var(--border)}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
+.stat-val{font-size:1.8rem;font-weight:800;margin-bottom:4px}
+.stat-label{font-size:0.82rem;color:var(--muted);font-weight:500}
+.card{background:var(--card);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid var(--border);margin-bottom:20px}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.shorten-form{display:flex;gap:12px;flex-wrap:wrap}
+.shorten-input{flex:1;min-width:200px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text)}
+.shorten-input:focus{border-color:var(--primary)}
+.result-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:14px;display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.result-box.show{display:flex}
+.result-link{font-size:0.9rem;font-weight:600;color:var(--primary);word-break:break-all}
+.action-btn{padding:7px 16px;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;border:none;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;font-family:'Plus Jakarta Sans',sans-serif}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:0.78rem;font-weight:700;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:2px solid var(--border)}
+td{padding:12px;border-bottom:1px solid var(--border);font-size:0.88rem;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.link-text{font-family:monospace;font-size:0.82rem;color:var(--primary);word-break:break-all}
+.badge{padding:3px 10px;border-radius:100px;font-size:0.75rem;font-weight:700}
+.badge-green{background:rgba(16,185,129,0.1);color:var(--green)}
+.badge-red{background:rgba(239,68,68,0.1);color:var(--red)}
+.badge-blue{background:rgba(79,70,229,0.1);color:var(--primary)}
+.withdraw-form{max-width:460px}
 .select-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;color:var(--text)}
-.ref-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.ref-link-box{background:var(--bg);border:1.5px dashed var(--border);border-radius:10px;padding:14px 18px;font-size:0.9rem;color:var(--primary);font-weight:600;word-break:break-all}
-.ref-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
-.ref-stat{background:var(--bg);border-radius:12px;padding:16px;text-align:center}
-.ref-stat-num{font-size:1.5rem;font-weight:800;color:var(--primary)}
-.ref-stat-label{font-size:0.78rem;color:var(--muted);margin-top:4px}
-.profile-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);max-width:500px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.profile-avatar-big{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:white;margin-bottom:16px}
-#redirectPage{background:#0f172a;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px;gap:20px}
-.redirect-logo{font-size:1.3rem;font-weight:800;color:#06b6d4}
-.redirect-countdown-num{font-size:5rem;font-weight:800;background:linear-gradient(135deg,#4f46e5,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.redirect-label{color:rgba(255,255,255,0.6);font-size:1rem}
-.redirect-dest{color:rgba(255,255,255,0.4);font-size:0.8rem;word-break:break-all;max-width:400px}
-.redirect-ad-box{background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.15);border-radius:14px;padding:24px 40px;min-width:300px;color:rgba(255,255,255,0.4);font-size:0.82rem}
-.skip-ad-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);border-radius:8px;padding:10px 22px;cursor:pointer;font-size:0.85rem;font-family:'Plus Jakarta Sans',sans-serif}
-.progress-bar{width:300px;height:4px;background:rgba(255,255,255,0.1);border-radius:100px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,#4f46e5,#06b6d4);border-radius:100px;transition:width 1s linear}
-.hamburger{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text)}
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199}
-.sidebar-close{display:none;position:absolute;top:18px;right:16px;background:none;border:none;color:white;font-size:1.2rem;cursor:pointer}
-.toast{position:fixed;bottom:24px;right:24px;background:#1e1b4b;color:white;padding:13px 20px;border-radius:12px;font-size:0.88rem;font-weight:600;box-shadow:0 8px 25px rgba(0,0,0,0.3);z-index:9999;transform:translateY(80px);opacity:0;transition:all 0.3s}
-.toast.show{transform:translateY(0);opacity:1}
+.ref-box{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;font-family:monospace;font-size:0.88rem;word-break:break-all;margin-bottom:12px}
+.mobile-topbar{display:none;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--sidebar);color:white;position:sticky;top:0;z-index:100}
+.hamburger{background:none;border:none;color:white;font-size:1.4rem;cursor:pointer}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:150}
+.sidebar-overlay.open{display:block}
+#redirectPage{background:linear-gradient(135deg,#1e1b4b,#312e81);display:flex;align-items:center;justify-content:center;min-height:100vh;color:white;padding:24px}
+.rd-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:40px;max-width:480px;width:100%;text-align:center;backdrop-filter:blur(10px)}
+.rd-logo{font-size:1.2rem;font-weight:800;margin-bottom:28px;color:rgba(255,255,255,0.8)}
+.rd-logo span{color:#06b6d4}
+.rd-countdown{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:800;margin:0 auto 20px;box-shadow:0 8px 25px rgba(79,70,229,0.4)}
+.rd-title{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.rd-dest{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:24px;word-break:break-all}
+.rd-progress-bg{background:rgba(255,255,255,0.1);border-radius:100px;height:6px;margin-bottom:20px;overflow:hidden}
+.rd-progress{height:100%;background:linear-gradient(90deg,#06b6d4,#4f46e5);border-radius:100px;width:100%;transition:width 1s linear}
+.rd-skip{display:none;padding:10px 24px;border-radius:10px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-size:0.88rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e1b4b;color:white;padding:12px 24px;border-radius:12px;font-size:0.88rem;font-weight:600;opacity:0;transition:all 0.3s;z-index:9999;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:768px){
+.main-content{margin-left:0;padding:16px}
 .sidebar{transform:translateX(-100%)}
 .sidebar.open{transform:translateX(0)}
-.sidebar-close{display:block}
-.main-content{margin-left:0;padding:18px}
-.hamburger{display:block}
-.sidebar-overlay.open{display:block}
-.short-input-row{flex-direction:column}
+.mobile-topbar{display:flex}
 .land-nav{padding:14px 20px}
 .land-stats{gap:30px}
+.shorten-form{flex-direction:column}
 }
 </style>
 </head>
 <body>
-
 <div id="landingPage" class="page active">
 <nav class="land-nav">
 <div class="land-logo">Earning<span>Links</span></div>
 <div class="land-nav-btns">
-<button class="btn btn-outline" onclick="showAuth('login')">Login</button>
-<button class="btn btn-primary" onclick="showAuth('register')">Register Free</button>
+<button class="btn btn-outline" onclick="showPage('authPage');switchTab('login')">Login</button>
+<button class="btn btn-primary" onclick="showPage('authPage');switchTab('register')">Sign Up</button>
 </div>
 </nav>
 <div class="land-hero">
-<div class="land-badge">💰 Earn Money Per Click</div>
-<h1 class="land-h1">Shorten Links &<br/><span>Earn Real Money</span></h1>
-<p class="land-sub">Pakistan & India ki best URL shortener platform. Apne links share karo aur har click par paise kamao. Daily payment available!</p>
+<div class="land-badge">💰 Earn Money Online</div>
+<h1 class="land-h1">Shorten Links &<br><span>Earn Real Cash</span></h1>
+<p class="land-sub">Har click pe paise kamao! Links shorten karo, share karo aur $3 per 1000 clicks earn karo.</p>
 <div class="land-cta">
-<button class="btn-land btn-land-primary" onclick="showAuth('register')">🚀 Start Earning Free</button>
-<button class="btn-land btn-land-secondary" onclick="showAuth('login')">Login Account</button>
+<button class="btn-land btn-land-primary" onclick="showPage('authPage');switchTab('register')">🚀 Start Earning Free</button>
+<button class="btn-land btn-land-secondary" onclick="showPage('authPage');switchTab('login')">Login</button>
 </div>
 </div>
 <div class="land-stats">
-<div class="land-stat"><div class="land-stat-num">50K+</div><div class="land-stat-label">Active Users</div></div>
-<div class="land-stat"><div class="land-stat-num">$5</div><div class="land-stat-label">Min. Payout</div></div>
-<div class="land-stat"><div class="land-stat-num">$8</div><div class="land-stat-label">CPM Rate</div></div>
-<div class="land-stat"><div class="land-stat-num">Daily</div><div class="land-stat-label">Payments</div></div>
+<div class="land-stat"><div class="land-stat-num">$3.00</div><div class="land-stat-label">Per 1000 Clicks</div></div>
+<div class="land-stat"><div class="land-stat-num">24hr</div><div class="land-stat-label">Fast Withdrawal</div></div>
+<div class="land-stat"><div class="land-stat-num">$5</div><div class="land-stat-label">Min Withdraw</div></div>
+<div class="land-stat"><div class="land-stat-num">∞</div><div class="land-stat-label">Links Allowed</div></div>
 </div>
 <div class="land-features">
-<div class="land-section-title">Kyun Choose Karein EarningLinks?</div>
+<h2 class="land-section-title">Kyun Choose Karein?</h2>
 <div class="land-grid">
-<div class="land-card"><div class="land-card-icon">⚡</div><h3>Instant Shortening</h3><p>Koi bhi link 1 second mein short karo.</p></div>
-<div class="land-card"><div class="land-card-icon">💰</div><h3>High CPM Rates</h3><p>Pakistan ke liye $3–$5 CPM. Best rates.</p></div>
-<div class="land-card"><div class="land-card-icon">📊</div><h3>Real-time Stats</h3><p>Har click aur earning ka real-time data.</p></div>
-<div class="land-card"><div class="land-card-icon">👥</div><h3>Referral Bonus</h3><p>20% lifetime commission har referral par.</p></div>
-<div class="land-card"><div class="land-card-icon">💳</div><h3>Daily Payment</h3><p>JazzCash, EasyPaisa, PayPal. Min $5.</p></div>
-<div class="land-card"><div class="land-card-icon">🔒</div><h3>Secure Platform</h3><p>Aapki earnings 100% secure. SSL protected.</p></div>
+<div class="land-card"><div class="land-card-icon">⚡</div><h3>Instant Link Shortening</h3><p>Koi bhi URL seconds mein shorten karo aur share karna shuru karo.</p></div>
+<div class="land-card"><div class="land-card-icon">💵</div><h3>Real Earnings</h3><p>Har valid click pe earn karo. Jitne zyada clicks, utni zyada kamai.</p></div>
+<div class="land-card"><div class="land-card-icon">📊</div><h3>Live Analytics</h3><p>Real-time clicks aur earnings track karo apne dashboard pe.</p></div>
+<div class="land-card"><div class="land-card-icon">👥</div><h3>Referral Bonus</h3><p>Dosto ko refer karo aur unki earnings ka bonus pao.</p></div>
 </div>
 </div>
 <div class="land-rates">
-<div class="land-section-title">CPM Rates by Country</div>
+<h2 class="land-section-title">Payment Rates</h2>
 <div class="rates-table">
 <table>
-<tr><th>Country</th><th>CPM Rate</th><th>Tier</th></tr>
-<tr><td>🇺🇸 USA / Canada</td><td><span class="rate-badge">$8–$15</span></td><td>Tier 1</td></tr>
-<tr><td>🇬🇧 UK / Australia</td><td><span class="rate-badge">$6–$10</span></td><td>Tier 1</td></tr>
-<tr><td>🇵🇰 Pakistan</td><td><span class="rate-badge">$3–$5</span></td><td>Tier 2</td></tr>
-<tr><td>🇮🇳 India</td><td><span class="rate-badge">$2–$4</span></td><td>Tier 2</td></tr>
-<tr><td>🌍 Other</td><td><span class="rate-badge">$1–$3</span></td><td>Tier 3</td></tr>
+<tr><th>Country</th><th>Rate per 1000 Views</th><th>Status</th></tr>
+<tr><td>🇺🇸 USA</td><td>$3.00</td><td><span class="rate-badge">TOP</span></td></tr>
+<tr><td>🇬🇧 UK</td><td>$3.00</td><td><span class="rate-badge">TOP</span></td></tr>
+<tr><td>🇵🇰 Pakistan</td><td>$3.00</td><td><span class="rate-badge">TOP</span></td></tr>
+<tr><td>🌍 Other</td><td>$3.00</td><td><span class="rate-badge">ALL</span></td></tr>
 </table>
 </div>
 </div>
-<div class="land-footer">© 2025 EarningLinks · Privacy · Terms · Contact</div>
+<div class="land-footer">© 2025 EarningLinks. All rights reserved.</div>
 </div>
-
 <div id="authPage" class="page">
 <div class="auth-box">
 <div class="auth-logo">Earning<span>Links</span></div>
-<div class="auth-sub">Paise kamao — links share karke</div>
+<div class="auth-sub">Paise kamana shuru karo aaj se!</div>
 <div class="auth-tabs">
-<div class="auth-tab active" id="loginTab" onclick="switchTab('login')">Login</div>
-<div class="auth-tab" id="registerTab" onclick="switchTab('register')">Register</div>
+<div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Login</div>
+<div class="auth-tab" id="tab-register" onclick="switchTab('register')">Register</div>
 </div>
-<div class="auth-form active" id="loginForm">
-<div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="loginEmail" placeholder="apna@email.com"/></div>
-<div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="loginPass" placeholder="••••••••"/></div>
-<button class="form-btn" onclick="doLogin()">Login →</button>
+<div class="auth-form active" id="form-login">
+<div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="loginEmail" placeholder="email@example.com"/></div>
+<div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="loginPass" placeholder="Password"/></div>
+<button class="form-btn" onclick="doLogin()">Login</button>
 <div class="auth-msg" id="loginMsg"></div>
 </div>
-<div class="auth-form" id="registerForm">
-<div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="regName" placeholder="Aapka naam"/></div>
-<div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="regEmail" placeholder="apna@email.com"/></div>
-<div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="regPass" placeholder="Min 6 characters"/></div>
-<div class="form-group"><label class="form-label">Referral Code (Optional)</label><input type="text" class="form-input" id="regRef" placeholder="Friend ka referral code"/></div>
-<button class="form-btn" onclick="doRegister()">Create Account →</button>
+<div class="auth-form" id="form-register">
+<div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" id="regName" placeholder="Apna naam"/></div>
+<div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="regEmail" placeholder="email@example.com"/></div>
+<div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="regPass" placeholder="Min 6 characters"/></div>
+<button class="form-btn" onclick="doRegister()">Register</button>
 <div class="auth-msg" id="regMsg"></div>
 </div>
-<div style="text-align:center;margin-top:16px">
-<button onclick="showPage('landingPage')" style="background:none;border:none;color:var(--muted);font-size:0.82rem;cursor:pointer">← Back to Home</button>
 </div>
 </div>
-</div>
-
-<div id="dashPage" class="page" style="display:none;">
+<div id="dashPage" class="page">
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 <div class="sidebar" id="sidebar">
-<button class="sidebar-close" onclick="closeSidebar()">✕</button>
 <div class="sidebar-logo">Earning<span>Links</span></div>
 <nav class="sidebar-nav">
-<div class="nav-item active" onclick="showPanel('home')"><span class="nav-icon">🏠</span> Dashboard</div>
-<div class="nav-item" onclick="showPanel('shorten')"><span class="nav-icon">⚡</span> Shorten Link</div>
-<div class="nav-item" onclick="showPanel('mylinks')"><span class="nav-icon">🔗</span> My Links</div>
-<div class="nav-item" onclick="showPanel('earnings')"><span class="nav-icon">💰</span> Earnings</div>
-<div class="nav-item" onclick="showPanel('withdraw')"><span class="nav-icon">💳</span> Withdraw</div>
-<div class="nav-item" onclick="showPanel('referral')"><span class="nav-icon">👥</span> Referral</div>
-<div class="nav-item" onclick="showPanel('profile')"><span class="nav-icon">👤</span> Profile</div>
-<div class="nav-item" onclick="doLogout()" style="color:rgba(239,68,68,0.7)"><span class="nav-icon">🚪</span> Logout</div>
+<div class="nav-item active" id="nav-dashboard" onclick="showPanel('dashboard')"><span class="nav-icon">🏠</span>Dashboard</div>
+<div class="nav-item" id="nav-shorten" onclick="showPanel('shorten')"><span class="nav-icon">✂️</span>Shorten Link</div>
+<div class="nav-item" id="nav-links" onclick="showPanel('links')"><span class="nav-icon">🔗</span>My Links</div>
+<div class="nav-item" id="nav-earnings" onclick="showPanel('earnings')"><span class="nav-icon">💰</span>Earnings</div>
+<div class="nav-item" id="nav-withdraw" onclick="showPanel('withdraw')"><span class="nav-icon">💳</span>Withdraw</div>
+<div class="nav-item" id="nav-referral" onclick="showPanel('referral')"><span class="nav-icon">👥</span>Referral</div>
+<div class="nav-item" id="nav-profile" onclick="showPanel('profile')"><span class="nav-icon">👤</span>Profile</div>
 </nav>
 <div class="sidebar-footer">
 <div class="user-info">
 <div class="user-avatar" id="sidebarAvatar">U</div>
-<div><div class="user-name" id="sidebarName">User</div><div class="user-email" id="sidebarEmail">user@email.com</div></div>
+<div><div class="user-name" id="sidebarName">User</div><div class="user-email" id="sidebarEmail">email</div></div>
+</div>
+<button class="form-btn" style="margin-top:10px;padding:9px;font-size:0.85rem" onclick="doLogout()">Logout</button>
 </div>
 </div>
-</div>
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 <div class="main-content">
-<div class="topbar">
-<div style="display:flex;align-items:center;gap:12px">
-<button class="hamburger" onclick="openSidebar()">☰</button>
-<div class="topbar-title" id="panelTitle">Dashboard</div>
-</div>
-<div class="topbar-right">
-<div class="balance-badge">💰 $<span id="topBalance">0.00</span></div>
-</div>
-</div>
-
-<div class="panel active" id="panel-home">
+<div class="mobile-topbar"><button class="hamburger" onclick="openSidebar()">☰</button><span style="font-weight:800;font-size:1rem">EarningLinks</span><span class="balance-badge" id="topBalance">0.00</span></div>
+<div class="panel active" id="panel-dashboard">
+<div class="topbar"><div class="topbar-title">Dashboard 🏠</div><div class="topbar-right"><span class="balance-badge">$<span id="topBalance">0.00</span></span></div></div>
 <div class="stats-grid">
-<div class="stat-card"><div class="stat-card-icon sc-purple">🔗</div><div class="stat-card-val" id="stat-links">0</div><div class="stat-card-label">Total Links</div></div>
-<div class="stat-card"><div class="stat-card-icon sc-blue">👆</div><div class="stat-card-val" id="stat-clicks">0</div><div class="stat-card-label">Total Clicks</div></div>
-<div class="stat-card"><div class="stat-card-icon sc-green">💰</div><div class="stat-card-val">$<span id="stat-earn">0.00</span></div><div class="stat-card-label">Total Earnings</div></div>
-<div class="stat-card"><div class="stat-card-icon sc-yellow">👥</div><div class="stat-card-val" id="stat-refs">0</div><div class="stat-card-label">Referrals</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(79,70,229,0.1)">🔗</div><div class="stat-val" id="stat-links">0</div><div class="stat-label">Total Links</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(6,182,212,0.1)">👆</div><div class="stat-val" id="stat-clicks">0</div><div class="stat-label">Total Clicks</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(16,185,129,0.1)">💰</div><div class="stat-val">$<span id="stat-earn">0.00</span></div><div class="stat-label">Total Earned</div></div>
+<div class="stat-card"><div class="stat-icon" style="background:rgba(245,158,11,0.1)">👥</div><div class="stat-val" id="stat-refs">0</div><div class="stat-label">Referrals</div></div>
 </div>
-<div class="shortener-card">
-<div class="card-title">⚡ Quick Link Shortener</div>
-<div class="short-input-row">
-<input type="url" class="short-input" id="homeUrlInput" placeholder="Yahan apna long URL paste karo..."/>
-<button class="short-btn" onclick="quickShorten()">Shorten →</button>
+<div class="card">
+<div class="card-title">✂️ Quick Shorten</div>
+<div class="shorten-form">
+<input class="shorten-input" type="url" id="quickUrl" placeholder="https://example.com/long-url"/>
+<button class="btn btn-primary" onclick="doShorten('quickUrl','quickResult')">Shorten</button>
 </div>
-<div class="result-row" id="homeResult">
-<span class="result-link" id="homeResultLink"></span>
-<button class="copy-btn" onclick="copyResult('homeResultLink')">Copy</button>
-</div>
-</div>
-<div class="table-card">
-<div class="table-head"><h3>Recent Links</h3><button class="btn btn-sm btn-primary" onclick="showPanel('mylinks')">View All</button></div>
-<div style="overflow-x:auto"><table class="data-table"><tr><th>Short Link</th><th>Clicks</th><th>Earning</th><th>Date</th></tr><tbody id="recentLinksBody"></tbody></table></div>
+<div class="result-box" id="quickResult">
+<span class="result-link" id="quickResultLink"></span>
+<button class="action-btn" onclick="copyResult('quickResultLink')">Copy</button>
 </div>
 </div>
-
+<div class="card">
+<div class="card-title">🕐 Recent Links</div>
+<div style="overflow-x:auto"><table><thead><tr><th>Short Link</th><th>Clicks</th><th>Earned</th><th>Date</th></tr></thead><tbody id="recentLinksBody"></tbody></table></div>
+</div>
+</div>
 <div class="panel" id="panel-shorten">
-<div class="shortener-card" style="max-width:600px">
-<div class="card-title">🔗 Shorten a New Link</div>
-<div class="form-group"><label class="form-label">Long URL</label><input type="url" class="form-input" id="shortenUrlInput" placeholder="https://example.com/very-long-url"/></div>
-<div class="form-group"><label class="form-label">Custom Alias (Optional)</label><input type="text" class="form-input" id="customAlias" placeholder="mylink"/></div>
-<button class="form-btn" onclick="createShortLink()">Create Short Link →</button>
-<div class="result-row" id="shortenResult" style="margin-top:14px"><span class="result-link" id="shortenResultLink"></span><button class="copy-btn" onclick="copyResult('shortenResultLink')">Copy</button></div>
+<div class="topbar"><div class="topbar-title">✂️ Shorten Link</div></div>
+<div class="card">
+<div class="card-title">🔗 New Short Link</div>
+<div class="shorten-form">
+<input class="shorten-input" type="url" id="shortenUrl" placeholder="https://example.com/your-long-url-here"/>
+<button class="btn btn-primary" onclick="doShorten('shortenUrl','shortenResult')">Shorten!</button>
+</div>
+<div class="result-box" id="shortenResult">
+<span class="result-link" id="shortenResultLink"></span>
+<button class="action-btn" onclick="copyResult('shortenResultLink')">Copy</button>
 </div>
 </div>
-
-<div class="panel" id="panel-mylinks">
-<div class="table-card">
-<div class="table-head"><h3>All My Links</h3><span id="linksCount" style="color:var(--muted);font-size:0.85rem"></span></div>
-<div style="overflow-x:auto"><table class="data-table"><tr><th>Short Link</th><th>Original URL</th><th>Clicks</th><th>Earning</th><th>Status</th><th>Action</th></tr><tbody id="allLinksBody"></tbody></table></div>
+</div>
+<div class="panel" id="panel-links">
+<div class="topbar"><div class="topbar-title">🔗 My Links</div><div class="topbar-right"><span id="linksCount" style="color:var(--muted);font-size:0.88rem"></span></div></div>
+<div class="card">
+<div style="overflow-x:auto"><table><thead><tr><th>Short Link</th><th>Original URL</th><th>Clicks</th><th>Earned</th><th>Status</th><th>Action</th></tr></thead><tbody id="allLinksBody"></tbody></table></div>
 </div>
 </div>
-
 <div class="panel" id="panel-earnings">
+<div class="topbar"><div class="topbar-title">💰 Earnings</div></div>
 <div class="stats-grid">
-<div class="stat-card"><div class="stat-card-icon sc-green">💰</div><div class="stat-card-val">$<span id="earn-total">0.00</span></div><div class="stat-card-label">Total Earned</div></div>
-<div class="stat-card"><div class="stat-card-icon sc-blue">💳</div><div class="stat-card-val">$<span id="earn-available">0.00</span></div><div class="stat-card-label">Available</div></div>
-<div class="stat-card"><div class="stat-card-icon sc-yellow">📤</div><div class="stat-card-val">$<span id="earn-withdrawn">0.00</span></div><div class="stat-card-label">Withdrawn</div></div>
-<div class="stat-card"><div class="stat-card-icon sc-purple">👆</div><div class="stat-card-val" id="earn-clicks">0</div><div class="stat-card-label">Total Clicks</div></div>
+<div class="stat-card"><div class="stat-val">$<span id="earn-total">0.00</span></div><div class="stat-label">Total Earned</div></div>
+<div class="stat-card"><div class="stat-val">$<span id="earn-available">0.00</span></div><div class="stat-label">Available</div></div>
+<div class="stat-card"><div class="stat-val">$<span id="earn-withdrawn">0.00</span></div><div class="stat-label">Withdrawn</div></div>
+<div class="stat-card"><div class="stat-val"><span id="earn-clicks">0</span></div><div class="stat-label">Total Clicks</div></div>
 </div>
-<div class="table-card">
-<div class="table-head"><h3>Earning History</h3></div>
-<div style="overflow-x:auto"><table class="data-table"><tr><th>Date</th><th>Link</th><th>Clicks</th><th>CPM</th><th>Earned</th></tr><tbody id="earnHistoryBody"></tbody></table></div>
+<div class="card">
+<div class="card-title">📊 Earnings History</div>
+<div style="overflow-x:auto"><table><thead><tr><th>Date</th><th>Link</th><th>Clicks</th><th>Rate</th><th>Earned</th></tr></thead><tbody id="earnHistoryBody"></tbody></table></div>
 </div>
 </div>
-
 <div class="panel" id="panel-withdraw">
-<div class="withdraw-card">
-<div class="card-title">💳 Withdraw Earnings</div>
-<div style="color:var(--muted);font-size:0.85rem">Available Balance</div>
-<div class="balance-big">$<span id="withdrawBalance">0.00</span></div>
-<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;font-size:0.82rem;color:#92400e;margin-bottom:20px">⚠️ Minimum withdrawal: $5.00</div>
-<div class="form-group"><label class="form-label">Payment Method</label><select class="select-input" id="payMethod"><option>JazzCash</option><option>EasyPaisa</option><option>PayPal</option><option>Bank Transfer</option><option>USDT</option></select></div>
-<div class="form-group"><label class="form-label">Account Number / Email</label><input type="text" class="form-input" id="payAccount" placeholder="03xx-xxxxxxx"/></div>
-<div class="form-group"><label class="form-label">Amount ($)</label><input type="number" class="form-input" id="payAmount" placeholder="Min $5" min="5"/></div>
-<button class="form-btn" onclick="doWithdraw()">Request Withdrawal →</button>
+<div class="topbar"><div class="topbar-title">💳 Withdraw</div></div>
+<div class="card withdraw-form">
+<div class="card-title">💰 Available: $<span id="withdrawBalance">0.00</span></div>
+<div class="form-group"><label class="form-label">Payment Method</label><select class="select-input" id="payMethod"><option>EasyPaisa</option><option>JazzCash</option><option>Bank Transfer</option><option>PayPal</option><option>USDT</option></select></div>
+<div class="form-group"><label class="form-label">Account Number</label><input class="form-input" type="text" id="payAccount" placeholder="Account number"/></div>
+<div class="form-group"><label class="form-label">Amount ($)</label><input class="form-input" type="number" id="payAmount" placeholder="Min $5"/></div>
+<button class="form-btn" onclick="doWithdraw()">Withdraw Request</button>
 <div class="auth-msg" id="withdrawMsg"></div>
 </div>
 </div>
-
 <div class="panel" id="panel-referral">
-<div class="ref-card">
-<div class="card-title">👥 Referral — 20% Lifetime Commission</div>
-<div style="color:var(--muted);font-size:0.85rem;margin-bottom:10px">Apna referral link:</div>
-<div class="ref-link-box" id="refLinkBox">Loading...</div>
-<button class="copy-btn" style="margin-top:10px" onclick="copyRef()">Copy Referral Link</button>
-<div class="ref-stats">
-<div class="ref-stat"><div class="ref-stat-num" id="ref-count">0</div><div class="ref-stat-label">Referrals</div></div>
-<div class="ref-stat"><div class="ref-stat-num">$<span id="ref-earn">0.00</span></div><div class="ref-stat-label">Ref Earnings</div></div>
-<div class="ref-stat"><div class="ref-stat-num">20%</div><div class="ref-stat-label">Commission</div></div>
+<div class="topbar"><div class="topbar-title">👥 Referral Program</div></div>
+<div class="card">
+<div class="card-title">🔗 Your Referral Link</div>
+<div class="ref-box" id="refLinkBox"></div>
+<button class="btn btn-primary" onclick="copyRef()">Copy Referral Link</button>
+<div style="display:flex;gap:18px;margin-top:20px;flex-wrap:wrap">
+<div class="stat-card" style="flex:1"><div class="stat-val" id="ref-count">0</div><div class="stat-label">Total Referrals</div></div>
+<div class="stat-card" style="flex:1"><div class="stat-val">$<span id="ref-earn">0.00</span></div><div class="stat-label">Referral Earnings</div></div>
 </div>
 </div>
 </div>
-
 <div class="panel" id="panel-profile">
-<div class="profile-card">
-<div class="profile-avatar-big" id="profileAvatar">U</div>
-<div class="card-title">Account Settings</div>
-<div class="form-group" style="margin-top:14px"><label class="form-label">Full Name</label><input type="text" class="form-input" id="profileName"/></div>
-<div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="profileEmail" readonly style="opacity:0.6"/></div>
-<div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-input" id="profilePass" placeholder="Blank rakhein to same rahega"/></div>
+<div class="topbar"><div class="topbar-title">👤 Profile</div></div>
+<div class="card" style="max-width:460px">
+<div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" id="profileName"/></div>
+<div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="profileEmail" disabled/></div>
+<div class="form-group"><label class="form-label">New Password</label><input class="form-input" type="password" id="profilePass" placeholder="Khali chhodo agar change nahi karna"/></div>
 <button class="form-btn" onclick="saveProfile()">Save Changes</button>
 <div class="auth-msg" id="profileMsg"></div>
 </div>
 </div>
-
 </div>
 </div>
-
 <div id="redirectPage" class="page">
-<div class="redirect-logo">⚡ EarningLinks</div>
-<div style="color:rgba(255,255,255,0.5);font-size:0.85rem">Redirecting to:</div>
-<div class="redirect-dest" id="redirectDest">Loading...</div>
-<div class="redirect-ad-box">
-<div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Advertisement</div>
-<!-- ADSTERRA/MONETAG CODE YAHAN LAGAO -->
-300×250 Ad — Adsterra Code Yahan
+<div class="rd-box">
+<div class="rd-logo">Earning<span>Links</span></div>
+<div class="rd-countdown" id="rdCountdown">5</div>
+<div class="rd-title">Aapko redirect kiya ja raha hai...</div>
+<div class="rd-dest" id="redirectDest"></div>
+<div class="rd-progress-bg"><div class="rd-progress" id="rdProgress"></div></div>
+<button class="rd-skip" id="skipBtn" onclick="doFinalRedirect()">Skip →</button>
 </div>
-<div>
-<div class="redirect-label">Redirecting in</div>
-<div class="redirect-countdown-num" id="rdCountdown">5</div>
 </div>
-<div class="progress-bar"><div class="progress-fill" id="rdProgress" style="width:100%"></div></div>
-<button class="skip-ad-btn" id="skipBtn" style="display:none" onclick="doFinalRedirect()">Skip →</button>
-</div>
-
 <div class="toast" id="toast"></div>
-
 <script>
+const BASE=window.location.origin+window.location.pathname.replace(/\/[^/]*$/,'/');
+let db=JSON.parse(localStorage.getItem('eldb'))||{users:{},links:{}};
 let currentUser=null;
-let db=JSON.parse(localStorage.getItem('el_db')||'{"users":{},"links":{}}');
-const BASE=window.location.origin+window.location.pathname;
-const urlParams=new URLSearchParams(window.location.search);
-const rCode=urlParams.get('r');
-window.onload=()=>{
-if(rCode){showRedirectPage(rCode);return;}
-const saved=localStorage.getItem('el_user');
-if(saved){currentUser=JSON.parse(saved);showDash();}
-else{showPage('landingPage');}
-};
-function saveDB(){localStorage.setItem('el_db',JSON.stringify(db));}
-function saveUser(){localStorage.setItem('el_user',JSON.stringify(currentUser));}
-function showPage(id){
-document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
-const el=document.getElementById(id);
-el.style.display=id==='dashPage'?'flex':(id==='redirectPage'?'flex':'block');
-el.classList.add('active');
+function saveDB(){localStorage.setItem('eldb',JSON.stringify(db));}
+function saveUser(){localStorage.setItem('eluser',JSON.stringify(currentUser));}
+function loadSavedUser(){
+const u=localStorage.getItem('eluser');
+if(u){currentUser=JSON.parse(u);if(db.users[currentUser.id]){currentUser=db.users[currentUser.id];showDash();}else{localStorage.removeItem('eluser');}}
 }
-function showAuth(tab){showPage('authPage');switchTab(tab);}
-function switchTab(tab){
-document.getElementById('loginTab').classList.toggle('active',tab==='login');
-document.getElementById('registerTab').classList.toggle('active',tab==='register');
-document.getElementById('loginForm').classList.toggle('active',tab==='login');
-document.getElementById('registerForm').classList.toggle('active',tab==='register');
-}
-function doLogin(){
-const email=document.getElementById('loginEmail').value.trim();
-const pass=document.getElementById('loginPass').value;
-const msg=document.getElementById('loginMsg');
-if(!email||!pass){showMsg(msg,'Email aur password daalein');return;}
-const user=Object.values(db.users).find(u=>u.email===email&&u.password===pass);
-if(!user){showMsg(msg,'Galat email ya password');return;}
-currentUser=user;saveUser();showDash();
+function genCode(n=7){const c='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';let r='';for(let i=0;i<n;i++)r+=c[Math.floor(Math.random()*c.length)];return r;}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function switchTab(t){
+document.querySelectorAll('.auth-tab').forEach(el=>el.classList.remove('active'));
+document.querySelectorAll('.auth-form').forEach(el=>el.classList.remove('active'));
+document.getElementById('tab-'+t).classList.add('active');
+document.getElementById('form-'+t).classList.add('active');
 }
 function doRegister(){
 const name=document.getElementById('regName').value.trim();
-const email=document.getElementById('regEmail').value.trim();
+const email=document.getElementById('regEmail').value.trim().toLowerCase();
 const pass=document.getElementById('regPass').value;
-const ref=document.getElementById('regRef').value.trim();
 const msg=document.getElementById('regMsg');
-if(!name||!email||!pass){showMsg(msg,'Sab fields bharen');return;}
-if(pass.length<6){showMsg(msg,'Password min 6 characters');return;}
-if(Object.values(db.users).find(u=>u.email===email)){showMsg(msg,'Email pehle se registered hai');return;}
-const id='u_'+Date.now();
-const refCode='REF'+Math.random().toString(36).substr(2,6).toUpperCase();
-const newUser={id,name,email,password:pass,balance:0,totalEarned:0,withdrawn:0,refs:0,refEarn:0,refCode,joinDate:new Date().toLocaleDateString(),refBy:ref||null};
-db.users[id]=newUser;saveDB();currentUser=newUser;saveUser();
-showToast('✅ Welcome '+name+'!');showDash();
+const ref=new URLSearchParams(window.location.search).get('ref');
+if(!name||!email||!pass){showMsg(msg,'Sab fields bharo');return;}
+if(pass.length<6){showMsg(msg,'Password 6+ characters hona chahiye');return;}
+if(Object.values(db.users).find(u=>u.email===email)){showMsg(msg,'Email already registered hai');return;}
+const id='u_'+genCode(10);
+const refCode=genCode(8);
+db.users[id]={id,name,email,password:pass,balance:0,totalEarned:0,withdrawn:0,refs:0,refEarn:0,refCode,joined:new Date().toLocaleDateString()};
+if(ref){const refUser=Object.values(db.users).find(u=>u.refCode===ref);if(refUser&&refUser.id!==id){db.users[refUser.id].refs=(refUser.refs||0)+1;}}
+saveDB();
+showMsg(msg,'✅ Account ban gaya! Login karo.',true);
+setTimeout(()=>switchTab('login'),1500);
 }
-function doLogout(){localStorage.removeItem('el_user');currentUser=null;showPage('landingPage');}
-function showDash(){showPage('dashPage');refreshUser();updateSidebar();showPanel('home');}
-function refreshUser(){currentUser=db.users[currentUser.id];saveUser();}
+function doLogin(){
+const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+const pass=document.getElementById('loginPass').value;
+const msg=document.getElementById('loginMsg');
+const user=Object.values(db.users).find(u=>u.email===email&&u.password===pass);
+if(!user){showMsg(msg,'Email ya password galat hai');return;}
+currentUser=user;saveUser();showDash();
+}
+function doLogout(){currentUser=null;localStorage.removeItem('eluser');showPage('landingPage');}
+function showDash(){showPage('dashPage');updateSidebar();showPanel('dashboard');}
 function updateSidebar(){
-document.getElementById('sidebarAvatar').textContent=currentUser.name[0].toUpperCase();
-document.getElementById('profileAvatar').textContent=currentUser.name[0].toUpperCase();
+if(!currentUser)return;
 document.getElementById('sidebarName').textContent=currentUser.name;
 document.getElementById('sidebarEmail').textContent=currentUser.email;
-document.getElementById('topBalance').textContent=currentUser.balance.toFixed(2);
+document.getElementById('sidebarAvatar').textContent=currentUser.name[0].toUpperCase();
 }
-function showPanel(name){
-document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-document.getElementById('panel-'+name).classList.add('active');
-const titles={home:'Dashboard',shorten:'Shorten Link',mylinks:'My Links',earnings:'Earnings',withdraw:'Withdraw',referral:'Referral',profile:'Profile'};
-document.getElementById('panelTitle').textContent=titles[name]||name;
-const items=document.querySelectorAll('.nav-item');
-const map={home:0,shorten:1,mylinks:2,earnings:3,withdraw:4,referral:5,profile:6};
-if(map[name]!==undefined)items[map[name]].classList.add('active');
-if(name==='home')loadHome();
-if(name==='mylinks')loadMyLinks();
-if(name==='earnings')loadEarnings();
-if(name==='withdraw')loadWithdraw();
-if(name==='referral')loadReferral();
-if(name==='profile')loadProfile();
+function showPanel(p){
+document.querySelectorAll('.panel').forEach(el=>el.classList.remove('active'));
+document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+document.getElementById('panel-'+p).classList.add('active');
+document.getElementById('nav-'+p).classList.add('active');
 closeSidebar();
+if(p==='dashboard')loadDashboard();
+if(p==='links')loadMyLinks();
+if(p==='earnings')loadEarnings();
+if(p==='withdraw')loadWithdraw();
+if(p==='referral')loadReferral();
+if(p==='profile')loadProfile();
 }
+function refreshUser(){currentUser=db.users[currentUser.id];}
 function getUserLinks(){return Object.values(db.links).filter(l=>l.userId===currentUser.id);}
-function genCode(len=7){return Math.random().toString(36).substr(2,len);}
-function isValidUrl(s){try{const u=new URL(s);return u.protocol==='http:'||u.protocol==='https:';}catch{return false;}}
-function createLink(longUrl,alias){
-if(!isValidUrl(longUrl))return null;
-const code=alias||genCode();
-if(db.links[code])return db.links[code];
-const link={code,longUrl,userId:currentUser.id,clicks:0,earned:0,date:new Date().toLocaleDateString(),active:true};
-db.links[code]=link;saveDB();return link;
+function doShorten(inputId,resultId){
+const url=document.getElementById(inputId).value.trim();
+if(!url||!url.startsWith('http')){showToast('❌ Valid URL daalein (https://...)');return;}
+const code=genCode();
+const date=new Date().toLocaleDateString();
+db.links[code]={code,longUrl:url,userId:currentUser.id,clicks:0,earned:0,active:true,date};
+saveDB();
+const short=BASE+'?r='+code;
+document.getElementById(resultId.replace('Result','ResultLink')).textContent=short;
+document.getElementById(resultId).classList.add('show');
+showToast('✅ Link ban gaya!');
 }
-function quickShorten(){
-const url=document.getElementById('homeUrlInput').value.trim();
-const link=createLink(url);
-if(!link){showToast('❌ Valid URL daalein (https://)');return;}
-const shortUrl=BASE+'?r='+link.code;
-document.getElementById('homeResultLink').textContent=shortUrl;
-document.getElementById('homeResult').classList.add('show');
-loadHome();showToast('✅ Link short ho gaya!');
-}
-function createShortLink(){
-const url=document.getElementById('shortenUrlInput').value.trim();
-const alias=document.getElementById('customAlias').value.trim().replace(/\s/g,'');
-const link=createLink(url,alias);
-if(!link){showToast('❌ Valid URL daalein (https://)');return;}
-const shortUrl=BASE+'?r='+link.code;
-document.getElementById('shortenResultLink').textContent=shortUrl;
-document.getElementById('shortenResult').classList.add('show');
-showToast('✅ Link bana diya!');
-}
-function loadHome(){
+function loadDashboard(){
 refreshUser();
 const links=getUserLinks();
 const totalClicks=links.reduce((a,l)=>a+l.clicks,0);
@@ -622,6 +543,9 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 function showMsg(el,msg,green=false){el.textContent=msg;el.className='auth-msg show'+(green?' green':'');setTimeout(()=>el.classList.remove('show'),4000);}
 function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('open');}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');}
+const params=new URLSearchParams(window.location.search);
+if(params.get('r'))showRedirectPage(params.get('r'));
+else loadSavedUser();
 </script>
 </body>
 </html>
