@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>EarningLinks — Shorten & Earn Money</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<!-- Adsterra Ad #1 (Popunder / Global) -->
 <script src="https://pl30100368.effectivecpmnetwork.com/67/7b/6b/677b6b215362926d5383fb247add8be3.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -444,8 +443,7 @@ tr:last-child td{border-bottom:none}
 
 <div id="redirectPage" class="page">
 <div style="width:100%;max-width:700px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 16px">
-<div style="width:100%;display:flex;justify-content:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:10px;min-height:90px">
-<script src="https://pl30100369.effectivecpmnetwork.com/5a/9b/e5/5a9be56f5917d11b09bb4f033059701e.js"></script>
+<div style="width:100%;display:flex;justify-content:center;background:rgba(255,255,255,0.05);border-radius:12px;padding:10px;min-height:90px" id="adContainer">
 </div>
 <div class="rd-box" style="margin:0">
 <div class="rd-logo">Earning<span>Links</span></div>
@@ -584,12 +582,25 @@ function saveProfile(){
   currentUser=db.users[currentUser.id];saveDB();saveUser();updateSidebar();showMsg(msg,'✅ Profile update ho gayi!',true);
 }
 let redirectTarget='';let rdTimer=null;
+
+// ✅ AD FIX
+function loadAdsterraAd(){
+  const container=document.getElementById('adContainer');
+  container.innerHTML='';
+  const script=document.createElement('script');
+  script.src='//pl30100369.effectivecpmnetwork.com/5a/9b/e5/5a9be56f5917d11b09bb4f033059701e.js';
+  script.async=true;
+  script.setAttribute('data-cfasync','false');
+  container.appendChild(script);
+}
 function showRedirectPage(code){
   const link=db.links[code];if(!link){showPage('landingPage');showToast('❌ Link exist nahi karta');return;}
   redirectTarget=link.longUrl;showPage('redirectPage');document.getElementById('redirectDest').textContent=link.longUrl;
+  loadAdsterraAd(); // ✅ Ad dynamically load
   db.links[code].clicks=(link.clicks||0)+1;const earn=3/1000;
   db.links[code].earned=(link.earned||0)+earn;db.users[link.userId].balance=(db.users[link.userId].balance||0)+earn;db.users[link.userId].totalEarned=(db.users[link.userId].totalEarned||0)+earn;saveDB();
   let sec=15;const numEl=document.getElementById('rdCountdown');const progEl=document.getElementById('rdProgress');const skipBtn=document.getElementById('skipBtn');
+  progEl.style.width='100%';
   rdTimer=setInterval(()=>{sec--;numEl.textContent=sec;progEl.style.width=((sec/15)*100)+'%';if(sec<=0){clearInterval(rdTimer);doFinalRedirect();}if(sec<=3)skipBtn.style.display='block';},1000);
 }
 function doFinalRedirect(){clearInterval(rdTimer);if(redirectTarget)window.location.href=redirectTarget;}
