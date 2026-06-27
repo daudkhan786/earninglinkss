@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EarningLinks — Shorten & Earn Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f4ff;
+  --white:#ffffff;
+  --primary:#4f46e5;
+  --primary2:#7c3aed;
+  --accent:#06b6d4;
+  --green:#10b981;
+  --red:#ef4444;
+  --yellow:#f59e0b;
+  --text:#1e1b4b;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --card:#ffffff;
+  --sidebar:#1e1b4b;
+}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+#landingPage{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e40af 100%);color:white}
+.land-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.1)}
+.land-logo{font-size:1.4rem;font-weight:800;letter-spacing:-0.5px}
+.land-logo span{color:#06b6d4}
+.land-nav-btns{display:flex;gap:12px}
+.btn{padding:10px 22px;border-radius:10px;font-size:0.9rem;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,0.4);color:white}
+.btn-outline:hover{background:rgba(255,255,255,0.1)}
+.btn-primary{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;box-shadow:0 4px 15px rgba(79,70,229,0.4)}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:white;box-shadow:0 4px 15px rgba(16,185,129,0.4)}
+.btn-sm{padding:7px 16px;font-size:0.82rem}
+.land-hero{text-align:center;padding:80px 24px 60px}
+.land-badge{display:inline-block;background:rgba(6,182,212,0.2);border:1px solid rgba(6,182,212,0.4);color:#67e8f9;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:28px}
+.land-h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.1;margin-bottom:20px}
+.land-h1 span{background:linear-gradient(135deg,#06b6d4,#a5f3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.land-sub{color:rgba(255,255,255,0.7);font-size:1.1rem;max-width:560px;margin:0 auto 40px;line-height:1.7}
+.land-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-land{padding:14px 32px;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s}
+.btn-land-primary{background:linear-gradient(135deg,#06b6d4,#0891b2);color:white;box-shadow:0 8px 25px rgba(6,182,212,0.4)}
+.btn-land-primary:hover{transform:translateY(-2px)}
+.btn-land-secondary{background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.3);color:white}
+.land-stats{display:flex;justify-content:center;gap:60px;padding:50px 24px;flex-wrap:wrap}
+.land-stat{text-align:center}
+.land-stat-num{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#06b6d4,#a5f3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.land-stat-label{color:rgba(255,255,255,0.5);font-size:0.85rem;margin-top:4px}
+.land-features{background:rgba(255,255,255,0.03);padding:60px 24px;border-top:1px solid rgba(255,255,255,0.08)}
+.land-section-title{text-align:center;font-size:1.8rem;font-weight:800;margin-bottom:40px}
+.land-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto}
+.land-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px}
+.land-card-icon{width:48px;height:48px;background:linear-gradient(135deg,#4f46e5,#7c3aed);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:14px}
+.land-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.land-card p{color:rgba(255,255,255,0.55);font-size:0.85rem;line-height:1.6}
+.land-rates{padding:60px 24px;text-align:center}
+.rates-table{max-width:700px;margin:0 auto;background:rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)}
+.rates-table table{width:100%;border-collapse:collapse}
+.rates-table th{background:rgba(79,70,229,0.4);padding:14px 20px;text-align:left;font-size:0.85rem;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.8)}
+.rates-table td{padding:13px 20px;border-bottom:1px solid rgba(255,255,255,0.07);font-size:0.9rem;color:rgba(255,255,255,0.8)}
+.rates-table tr:last-child td{border-bottom:none}
+.rate-badge{background:rgba(6,182,212,0.2);color:#67e8f9;padding:3px 10px;border-radius:100px;font-size:0.78rem;font-weight:700}
+.land-footer{padding:24px;text-align:center;border-top:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-size:0.83rem}
+#authPage{background:linear-gradient(135deg,#1e1b4b,#312e81);display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.auth-box{background:white;border-radius:24px;padding:40px;max-width:420px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.3)}
+.auth-logo{text-align:center;font-size:1.5rem;font-weight:800;color:var(--primary);margin-bottom:8px}
+.auth-logo span{color:var(--accent)}
+.auth-sub{text-align:center;color:var(--muted);font-size:0.88rem;margin-bottom:28px}
+.auth-tabs{display:flex;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:24px}
+.auth-tab{flex:1;text-align:center;padding:10px;border-radius:9px;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--muted)}
+.auth-tab.active{background:white;color:var(--primary);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.auth-form{display:none}
+.auth-form.active{display:block}
+.form-group{margin-bottom:16px}
+.form-label{font-size:0.83rem;font-weight:600;color:var(--text);margin-bottom:6px;display:block}
+.form-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text)}
+.form-input:focus{border-color:var(--primary)}
+.form-btn{width:100%;padding:13px;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s;margin-top:4px}
+.form-btn:hover{opacity:0.9;transform:translateY(-1px)}
+.auth-msg{font-size:0.82rem;color:var(--red);margin-top:10px;text-align:center;display:none}
+.auth-msg.show{display:block}
+.auth-msg.green{color:var(--green)}
+#dashPage{display:flex;min-height:100vh}
+.sidebar{width:250px;background:var(--sidebar);color:white;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:200;transition:transform 0.3s}
+.sidebar-logo{padding:22px 24px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:1.2rem;font-weight:800}
+.sidebar-logo span{color:var(--accent)}
+.sidebar-nav{flex:1;padding:16px 12px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;color:rgba(255,255,255,0.6);font-size:0.88rem;font-weight:500;transition:all 0.2s;margin-bottom:4px}
+.nav-item:hover{background:rgba(255,255,255,0.08);color:white}
+.nav-item.active{background:linear-gradient(135deg,rgba(79,70,229,0.5),rgba(124,58,237,0.5));color:white;border:1px solid rgba(255,255,255,0.15)}
+.nav-icon{font-size:1.1rem;width:20px;text-align:center}
+.sidebar-footer{padding:16px;border-top:1px solid rgba(255,255,255,0.08)}
+.user-info{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.06)}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:700;color:white;flex-shrink:0}
+.user-name{font-size:0.85rem;font-weight:600;color:white}
+.user-email{font-size:0.75rem;color:rgba(255,255,255,0.5)}
+.main-content{flex:1;margin-left:250px;padding:28px;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.topbar-title{font-size:1.4rem;font-weight:800}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.balance-badge{background:linear-gradient(135deg,var(--green),#059669);color:white;padding:8px 16px;border-radius:10px;font-size:0.88rem;font-weight:700}
+.panel{display:none}
+.panel.active{display:block}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:28px}
+.stat-card{background:var(--card);border-radius:16px;padding:22px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.stat-card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
+.sc-purple{background:linear-gradient(135deg,rgba(79,70,229,0.15),rgba(124,58,237,0.15))}
+.sc-green{background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(5,150,105,0.15))}
+.sc-blue{background:linear-gradient(135deg,rgba(6,182,212,0.15),rgba(8,145,178,0.15))}
+.sc-yellow{background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(217,119,6,0.15))}
+.stat-card-val{font-size:1.9rem;font-weight:800;margin-bottom:4px}
+.stat-card-label{color:var(--muted);font-size:0.82rem}
+.shortener-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:16px}
+.short-input-row{display:flex;gap:10px}
+.short-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.2s;color:var(--text)}
+.short-input:focus{border-color:var(--primary)}
+.short-btn{padding:12px 22px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;border:none;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
+.result-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:13px 16px;margin-top:12px;flex-wrap:wrap;display:none}
+.result-row.show{display:flex}
+.result-link{color:var(--green);font-weight:700;font-size:0.92rem;word-break:break-all}
+.copy-btn{background:var(--green);color:white;border:none;border-radius:8px;padding:7px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.table-card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:24px}
+.table-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--border)}
+.table-head h3{font-size:0.95rem;font-weight:700}
+table.data-table{width:100%;border-collapse:collapse}
+table.data-table th{background:var(--bg);padding:11px 20px;text-align:left;font-size:0.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em}
+table.data-table td{padding:13px 20px;font-size:0.88rem;border-bottom:1px solid var(--border);vertical-align:middle}
+table.data-table tr:last-child td{border-bottom:none}
+.link-text{color:var(--primary);font-weight:600;word-break:break-all;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:0.75rem;font-weight:700}
+.badge-green{background:rgba(16,185,129,0.12);color:var(--green)}
+.badge-blue{background:rgba(6,182,212,0.12);color:var(--accent)}
+.badge-red{background:rgba(239,68,68,0.12);color:var(--red)}
+.action-btn{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 11px;font-size:0.78rem;cursor:pointer;transition:all 0.2s}
+.action-btn:hover{border-color:var(--primary);color:var(--primary)}
+.withdraw-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);max-width:500px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.balance-big{font-size:2.5rem;font-weight:800;color:var(--green);margin:12px 0}
+.select-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;color:var(--text)}
+.ref-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.ref-link-box{background:var(--bg);border:1.5px dashed var(--border);border-radius:10px;padding:14px 18px;font-size:0.9rem;color:var(--primary);font-weight:600;word-break:break-all}
+.ref-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.ref-stat{background:var(--bg);border-radius:12px;padding:16px;text-align:center}
+.ref-stat-num{font-size:1.5rem;font-weight:800;color:var(--primary)}
+.ref-stat-label{font-size:0.78rem;color:var(--muted);margin-top:4px}
+.profile-card{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);max-width:500px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.profile-avatar-big{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;color:white;margin-bottom:16px}
+#redirectPage{background:#0f172a;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px;gap:20px}
+.redirect-logo{font-size:1.3rem;font-weight:800;color:#06b6d4}
+.redirect-countdown-num{font-size:5rem;font-weight:800;background:linear-gradient(135deg,#4f46e5,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.redirect-label{color:rgba(255,255,255,0.6);font-size:1rem}
+.redirect-dest{color:rgba(255,255,255,0.4);font-size:0.8rem;word-break:break-all;max-width:400px}
+.redirect-ad-box{background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.15);border-radius:14px;padding:24px 40px;min-width:300px;color:rgba(255,255,255,0.4);font-size:0.82rem}
+.skip-ad-btn{background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);border-radius:8px;padding:10px 22px;cursor:pointer;font-size:0.85rem;font-family:'Plus Jakarta Sans',sans-serif}
+.progress-bar{width:300px;height:4px;background:rgba(255,255,255,0.1);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#4f46e5,#06b6d4);border-radius:100px;transition:width 1s linear}
+.hamburger{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199}
+.sidebar-close{display:none;position:absolute;top:18px;right:16px;background:none;border:none;color:white;font-size:1.2rem;cursor:pointer}
+.toast{position:fixed;bottom:24px;right:24px;background:#1e1b4b;color:white;padding:13px 20px;border-radius:12px;font-size:0.88rem;font-weight:600;box-shadow:0 8px 25px rgba(0,0,0,0.3);z-index:9999;transform:translateY(80px);opacity:0;transition:all 0.3s}
+.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:768px){
+.sidebar{transform:translateX(-100%)}
+.sidebar.open{transform:translateX(0)}
+.sidebar-close{display:block}
+.main-content{margin-left:0;padding:18px}
+.hamburger{display:block}
+.sidebar-overlay.open{display:block}
+.short-input-row{flex-direction:column}
+.land-nav{padding:14px 20px}
+.land-stats{gap:30px}
+}
+</style>
+</head>
+<body>
+
+<div id="landingPage" class="page active">
+<nav class="land-nav">
+<div class="land-logo">Earning<span>Links</span></div>
+<div class="land-nav-btns">
+<button class="btn btn-outline" onclick="showAuth('login')">Login</button>
+<button class="btn btn-primary" onclick="showAuth('register')">Register Free</button>
+</div>
+</nav>
+<div class="land-hero">
+<div class="land-badge">💰 Earn Money Per Click</div>
+<h1 class="land-h1">Shorten Links &<br/><span>Earn Real Money</span></h1>
+<p class="land-sub">Pakistan & India ki best URL shortener platform. Apne links share karo aur har click par paise kamao. Daily payment available!</p>
+<div class="land-cta">
+<button class="btn-land btn-land-primary" onclick="showAuth('register')">🚀 Start Earning Free</button>
+<button class="btn-land btn-land-secondary" onclick="showAuth('login')">Login Account</button>
+</div>
+</div>
+<div class="land-stats">
+<div class="land-stat"><div class="land-stat-num">50K+</div><div class="land-stat-label">Active Users</div></div>
+<div class="land-stat"><div class="land-stat-num">$5</div><div class="land-stat-label">Min. Payout</div></div>
+<div class="land-stat"><div class="land-stat-num">$8</div><div class="land-stat-label">CPM Rate</div></div>
+<div class="land-stat"><div class="land-stat-num">Daily</div><div class="land-stat-label">Payments</div></div>
+</div>
+<div class="land-features">
+<div class="land-section-title">Kyun Choose Karein EarningLinks?</div>
+<div class="land-grid">
+<div class="land-card"><div class="land-card-icon">⚡</div><h3>Instant Shortening</h3><p>Koi bhi link 1 second mein short karo.</p></div>
+<div class="land-card"><div class="land-card-icon">💰</div><h3>High CPM Rates</h3><p>Pakistan ke liye $3–$5 CPM. Best rates.</p></div>
+<div class="land-card"><div class="land-card-icon">📊</div><h3>Real-time Stats</h3><p>Har click aur earning ka real-time data.</p></div>
+<div class="land-card"><div class="land-card-icon">👥</div><h3>Referral Bonus</h3><p>20% lifetime commission har referral par.</p></div>
+<div class="land-card"><div class="land-card-icon">💳</div><h3>Daily Payment</h3><p>JazzCash, EasyPaisa, PayPal. Min $5.</p></div>
+<div class="land-card"><div class="land-card-icon">🔒</div><h3>Secure Platform</h3><p>Aapki earnings 100% secure. SSL protected.</p></div>
+</div>
+</div>
+<div class="land-rates">
+<div class="land-section-title">CPM Rates by Country</div>
+<div class="rates-table">
+<table>
+<tr><th>Country</th><th>CPM Rate</th><th>Tier</th></tr>
+<tr><td>🇺🇸 USA / Canada</td><td><span class="rate-badge">$8–$15</span></td><td>Tier 1</td></tr>
+<tr><td>🇬🇧 UK / Australia</td><td><span class="rate-badge">$6–$10</span></td><td>Tier 1</td></tr>
+<tr><td>🇵🇰 Pakistan</td><td><span class="rate-badge">$3–$5</span></td><td>Tier 2</td></tr>
+<tr><td>🇮🇳 India</td><td><span class="rate-badge">$2–$4</span></td><td>Tier 2</td></tr>
+<tr><td>🌍 Other</td><td><span class="rate-badge">$1–$3</span></td><td>Tier 3</td></tr>
+</table>
+</div>
+</div>
+<div class="land-footer">© 2025 EarningLinks · Privacy · Terms · Contact</div>
+</div>
+
+<div id="authPage" class="page">
+<div class="auth-box">
+<div class="auth-logo">Earning<span>Links</span></div>
+<div class="auth-sub">Paise kamao — links share karke</div>
+<div class="auth-tabs">
+<div class="auth-tab active" id="loginTab" onclick="switchTab('login')">Login</div>
+<div class="auth-tab" id="registerTab" onclick="switchTab('register')">Register</div>
+</div>
+<div class="auth-form active" id="loginForm">
+<div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="loginEmail" placeholder="apna@email.com"/></div>
+<div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="loginPass" placeholder="••••••••"/></div>
+<button class="form-btn" onclick="doLogin()">Login →</button>
+<div class="auth-msg" id="loginMsg"></div>
+</div>
+<div class="auth-form" id="registerForm">
+<div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="regName" placeholder="Aapka naam"/></div>
+<div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="regEmail" placeholder="apna@email.com"/></div>
+<div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="regPass" placeholder="Min 6 characters"/></div>
+<div class="form-group"><label class="form-label">Referral Code (Optional)</label><input type="text" class="form-input" id="regRef" placeholder="Friend ka referral code"/></div>
+<button class="form-btn" onclick="doRegister()">Create Account →</button>
+<div class="auth-msg" id="regMsg"></div>
+</div>
+<div style="text-align:center;margin-top:16px">
+<button onclick="showPage('landingPage')" style="background:none;border:none;color:var(--muted);font-size:0.82rem;cursor:pointer">← Back to Home</button>
+</div>
+</div>
+</div>
+
+<div id="dashPage" class="page" style="display:none;">
+<div class="sidebar" id="sidebar">
+<button class="sidebar-close" onclick="closeSidebar()">✕</button>
+<div class="sidebar-logo">Earning<span>Links</span></div>
+<nav class="sidebar-nav">
+<div class="nav-item active" onclick="showPanel('home')"><span class="nav-icon">🏠</span> Dashboard</div>
+<div class="nav-item" onclick="showPanel('shorten')"><span class="nav-icon">⚡</span> Shorten Link</div>
+<div class="nav-item" onclick="showPanel('mylinks')"><span class="nav-icon">🔗</span> My Links</div>
+<div class="nav-item" onclick="showPanel('earnings')"><span class="nav-icon">💰</span> Earnings</div>
+<div class="nav-item" onclick="showPanel('withdraw')"><span class="nav-icon">💳</span> Withdraw</div>
+<div class="nav-item" onclick="showPanel('referral')"><span class="nav-icon">👥</span> Referral</div>
+<div class="nav-item" onclick="showPanel('profile')"><span class="nav-icon">👤</span> Profile</div>
+<div class="nav-item" onclick="doLogout()" style="color:rgba(239,68,68,0.7)"><span class="nav-icon">🚪</span> Logout</div>
+</nav>
+<div class="sidebar-footer">
+<div class="user-info">
+<div class="user-avatar" id="sidebarAvatar">U</div>
+<div><div class="user-name" id="sidebarName">User</div><div class="user-email" id="sidebarEmail">user@email.com</div></div>
+</div>
+</div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="main-content">
+<div class="topbar">
+<div style="display:flex;align-items:center;gap:12px">
+<button class="hamburger" onclick="openSidebar()">☰</button>
+<div class="topbar-title" id="panelTitle">Dashboard</div>
+</div>
+<div class="topbar-right">
+<div class="balance-badge">💰 $<span id="topBalance">0.00</span></div>
+</div>
+</div>
+
+<div class="panel active" id="panel-home">
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-card-icon sc-purple">🔗</div><div class="stat-card-val" id="stat-links">0</div><div class="stat-card-label">Total Links</div></div>
+<div class="stat-card"><div class="stat-card-icon sc-blue">👆</div><div class="stat-card-val" id="stat-clicks">0</div><div class="stat-card-label">Total Clicks</div></div>
+<div class="stat-card"><div class="stat-card-icon sc-green">💰</div><div class="stat-card-val">$<span id="stat-earn">0.00</span></div><div class="stat-card-label">Total Earnings</div></div>
+<div class="stat-card"><div class="stat-card-icon sc-yellow">👥</div><div class="stat-card-val" id="stat-refs">0</div><div class="stat-card-label">Referrals</div></div>
+</div>
+<div class="shortener-card">
+<div class="card-title">⚡ Quick Link Shortener</div>
+<div class="short-input-row">
+<input type="url" class="short-input" id="homeUrlInput" placeholder="Yahan apna long URL paste karo..."/>
+<button class="short-btn" onclick="quickShorten()">Shorten →</button>
+</div>
+<div class="result-row" id="homeResult">
+<span class="result-link" id="homeResultLink"></span>
+<button class="copy-btn" onclick="copyResult('homeResultLink')">Copy</button>
+</div>
+</div>
+<div class="table-card">
+<div class="table-head"><h3>Recent Links</h3><button class="btn btn-sm btn-primary" onclick="showPanel('mylinks')">View All</button></div>
+<div style="overflow-x:auto"><table class="data-table"><tr><th>Short Link</th><th>Clicks</th><th>Earning</th><th>Date</th></tr><tbody id="recentLinksBody"></tbody></table></div>
+</div>
+</div>
+
+<div class="panel" id="panel-shorten">
+<div class="shortener-card" style="max-width:600px">
+<div class="card-title">🔗 Shorten a New Link</div>
+<div class="form-group"><label class="form-label">Long URL</label><input type="url" class="form-input" id="shortenUrlInput" placeholder="https://example.com/very-long-url"/></div>
+<div class="form-group"><label class="form-label">Custom Alias (Optional)</label><input type="text" class="form-input" id="customAlias" placeholder="mylink"/></div>
+<button class="form-btn" onclick="createShortLink()">Create Short Link →</button>
+<div class="result-row" id="shortenResult" style="margin-top:14px"><span class="result-link" id="shortenResultLink"></span><button class="copy-btn" onclick="copyResult('shortenResultLink')">Copy</button></div>
+</div>
+</div>
+
+<div class="panel" id="panel-mylinks">
+<div class="table-card">
+<div class="table-head"><h3>All My Links</h3><span id="linksCount" style="color:var(--muted);font-size:0.85rem"></span></div>
+<div style="overflow-x:auto"><table class="data-table"><tr><th>Short Link</th><th>Original URL</th><th>Clicks</th><th>Earning</th><th>Status</th><th>Action</th></tr><tbody id="allLinksBody"></tbody></table></div>
+</div>
+</div>
+
+<div class="panel" id="panel-earnings">
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-card-icon sc-green">💰</div><div class="stat-card-val">$<span id="earn-total">0.00</span></div><div class="stat-card-label">Total Earned</div></div>
+<div class="stat-card"><div class="stat-card-icon sc-blue">💳</div><div class="stat-card-val">$<span id="earn-available">0.00</span></div><div class="stat-card-label">Available</div></div>
+<div class="stat-card"><div class="stat-card-icon sc-yellow">📤</div><div class="stat-card-val">$<span id="earn-withdrawn">0.00</span></div><div class="stat-card-label">Withdrawn</div></div>
+<div class="stat-card"><div class="stat-card-icon sc-purple">👆</div><div class="stat-card-val" id="earn-clicks">0</div><div class="stat-card-label">Total Clicks</div></div>
+</div>
+<div class="table-card">
+<div class="table-head"><h3>Earning History</h3></div>
+<div style="overflow-x:auto"><table class="data-table"><tr><th>Date</th><th>Link</th><th>Clicks</th><th>CPM</th><th>Earned</th></tr><tbody id="earnHistoryBody"></tbody></table></div>
+</div>
+</div>
+
+<div class="panel" id="panel-withdraw">
+<div class="withdraw-card">
+<div class="card-title">💳 Withdraw Earnings</div>
+<div style="color:var(--muted);font-size:0.85rem">Available Balance</div>
+<div class="balance-big">$<span id="withdrawBalance">0.00</span></div>
+<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;font-size:0.82rem;color:#92400e;margin-bottom:20px">⚠️ Minimum withdrawal: $5.00</div>
+<div class="form-group"><label class="form-label">Payment Method</label><select class="select-input" id="payMethod"><option>JazzCash</option><option>EasyPaisa</option><option>PayPal</option><option>Bank Transfer</option><option>USDT</option></select></div>
+<div class="form-group"><label class="form-label">Account Number / Email</label><input type="text" class="form-input" id="payAccount" placeholder="03xx-xxxxxxx"/></div>
+<div class="form-group"><label class="form-label">Amount ($)</label><input type="number" class="form-input" id="payAmount" placeholder="Min $5" min="5"/></div>
+<button class="form-btn" onclick="doWithdraw()">Request Withdrawal →</button>
+<div class="auth-msg" id="withdrawMsg"></div>
+</div>
+</div>
+
+<div class="panel" id="panel-referral">
+<div class="ref-card">
+<div class="card-title">👥 Referral — 20% Lifetime Commission</div>
+<div style="color:var(--muted);font-size:0.85rem;margin-bottom:10px">Apna referral link:</div>
+<div class="ref-link-box" id="refLinkBox">Loading...</div>
+<button class="copy-btn" style="margin-top:10px" onclick="copyRef()">Copy Referral Link</button>
+<div class="ref-stats">
+<div class="ref-stat"><div class="ref-stat-num" id="ref-count">0</div><div class="ref-stat-label">Referrals</div></div>
+<div class="ref-stat"><div class="ref-stat-num">$<span id="ref-earn">0.00</span></div><div class="ref-stat-label">Ref Earnings</div></div>
+<div class="ref-stat"><div class="ref-stat-num">20%</div><div class="ref-stat-label">Commission</div></div>
+</div>
+</div>
+</div>
+
+<div class="panel" id="panel-profile">
+<div class="profile-card">
+<div class="profile-avatar-big" id="profileAvatar">U</div>
+<div class="card-title">Account Settings</div>
+<div class="form-group" style="margin-top:14px"><label class="form-label">Full Name</label><input type="text" class="form-input" id="profileName"/></div>
+<div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="profileEmail" readonly style="opacity:0.6"/></div>
+<div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-input" id="profilePass" placeholder="Blank rakhein to same rahega"/></div>
+<button class="form-btn" onclick="saveProfile()">Save Changes</button>
+<div class="auth-msg" id="profileMsg"></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div id="redirectPage" class="page">
+<div class="redirect-logo">⚡ EarningLinks</div>
+<div style="color:rgba(255,255,255,0.5);font-size:0.85rem">Redirecting to:</div>
+<div class="redirect-dest" id="redirectDest">Loading...</div>
+<div class="redirect-ad-box">
+<div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Advertisement</div>
+<!-- ADSTERRA/MONETAG CODE YAHAN LAGAO -->
+300×250 Ad — Adsterra Code Yahan
+</div>
+<div>
+<div class="redirect-label">Redirecting in</div>
+<div class="redirect-countdown-num" id="rdCountdown">5</div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="rdProgress" style="width:100%"></div></div>
+<button class="skip-ad-btn" id="skipBtn" style="display:none" onclick="doFinalRedirect()">Skip →</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let currentUser=null;
+let db=JSON.parse(localStorage.getItem('el_db')||'{"users":{},"links":{}}');
+const BASE=window.location.origin+window.location.pathname;
+const urlParams=new URLSearchParams(window.location.search);
+const rCode=urlParams.get('r');
+window.onload=()=>{
+if(rCode){showRedirectPage(rCode);return;}
+const saved=localStorage.getItem('el_user');
+if(saved){currentUser=JSON.parse(saved);showDash();}
+else{showPage('landingPage');}
+};
+function saveDB(){localStorage.setItem('el_db',JSON.stringify(db));}
+function saveUser(){localStorage.setItem('el_user',JSON.stringify(currentUser));}
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+const el=document.getElementById(id);
+el.style.display=id==='dashPage'?'flex':(id==='redirectPage'?'flex':'block');
+el.classList.add('active');
+}
+function showAuth(tab){showPage('authPage');switchTab(tab);}
+function switchTab(tab){
+document.getElementById('loginTab').classList.toggle('active',tab==='login');
+document.getElementById('registerTab').classList.toggle('active',tab==='register');
+document.getElementById('loginForm').classList.toggle('active',tab==='login');
+document.getElementById('registerForm').classList.toggle('active',tab==='register');
+}
+function doLogin(){
+const email=document.getElementById('loginEmail').value.trim();
+const pass=document.getElementById('loginPass').value;
+const msg=document.getElementById('loginMsg');
+if(!email||!pass){showMsg(msg,'Email aur password daalein');return;}
+const user=Object.values(db.users).find(u=>u.email===email&&u.password===pass);
+if(!user){showMsg(msg,'Galat email ya password');return;}
+currentUser=user;saveUser();showDash();
+}
+function doRegister(){
+const name=document.getElementById('regName').value.trim();
+const email=document.getElementById('regEmail').value.trim();
+const pass=document.getElementById('regPass').value;
+const ref=document.getElementById('regRef').value.trim();
+const msg=document.getElementById('regMsg');
+if(!name||!email||!pass){showMsg(msg,'Sab fields bharen');return;}
+if(pass.length<6){showMsg(msg,'Password min 6 characters');return;}
+if(Object.values(db.users).find(u=>u.email===email)){showMsg(msg,'Email pehle se registered hai');return;}
+const id='u_'+Date.now();
+const refCode='REF'+Math.random().toString(36).substr(2,6).toUpperCase();
+const newUser={id,name,email,password:pass,balance:0,totalEarned:0,withdrawn:0,refs:0,refEarn:0,refCode,joinDate:new Date().toLocaleDateString(),refBy:ref||null};
+db.users[id]=newUser;saveDB();currentUser=newUser;saveUser();
+showToast('✅ Welcome '+name+'!');showDash();
+}
+function doLogout(){localStorage.removeItem('el_user');currentUser=null;showPage('landingPage');}
+function showDash(){showPage('dashPage');refreshUser();updateSidebar();showPanel('home');}
+function refreshUser(){currentUser=db.users[currentUser.id];saveUser();}
+function updateSidebar(){
+document.getElementById('sidebarAvatar').textContent=currentUser.name[0].toUpperCase();
+document.getElementById('profileAvatar').textContent=currentUser.name[0].toUpperCase();
+document.getElementById('sidebarName').textContent=currentUser.name;
+document.getElementById('sidebarEmail').textContent=currentUser.email;
+document.getElementById('topBalance').textContent=currentUser.balance.toFixed(2);
+}
+function showPanel(name){
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+document.getElementById('panel-'+name).classList.add('active');
+const titles={home:'Dashboard',shorten:'Shorten Link',mylinks:'My Links',earnings:'Earnings',withdraw:'Withdraw',referral:'Referral',profile:'Profile'};
+document.getElementById('panelTitle').textContent=titles[name]||name;
+const items=document.querySelectorAll('.nav-item');
+const map={home:0,shorten:1,mylinks:2,earnings:3,withdraw:4,referral:5,profile:6};
+if(map[name]!==undefined)items[map[name]].classList.add('active');
+if(name==='home')loadHome();
+if(name==='mylinks')loadMyLinks();
+if(name==='earnings')loadEarnings();
+if(name==='withdraw')loadWithdraw();
+if(name==='referral')loadReferral();
+if(name==='profile')loadProfile();
+closeSidebar();
+}
+function getUserLinks(){return Object.values(db.links).filter(l=>l.userId===currentUser.id);}
+function genCode(len=7){return Math.random().toString(36).substr(2,len);}
+function isValidUrl(s){try{const u=new URL(s);return u.protocol==='http:'||u.protocol==='https:';}catch{return false;}}
+function createLink(longUrl,alias){
+if(!isValidUrl(longUrl))return null;
+const code=alias||genCode();
+if(db.links[code])return db.links[code];
+const link={code,longUrl,userId:currentUser.id,clicks:0,earned:0,date:new Date().toLocaleDateString(),active:true};
+db.links[code]=link;saveDB();return link;
+}
+function quickShorten(){
+const url=document.getElementById('homeUrlInput').value.trim();
+const link=createLink(url);
+if(!link){showToast('❌ Valid URL daalein (https://)');return;}
+const shortUrl=BASE+'?r='+link.code;
+document.getElementById('homeResultLink').textContent=shortUrl;
+document.getElementById('homeResult').classList.add('show');
+loadHome();showToast('✅ Link short ho gaya!');
+}
+function createShortLink(){
+const url=document.getElementById('shortenUrlInput').value.trim();
+const alias=document.getElementById('customAlias').value.trim().replace(/\s/g,'');
+const link=createLink(url,alias);
+if(!link){showToast('❌ Valid URL daalein (https://)');return;}
+const shortUrl=BASE+'?r='+link.code;
+document.getElementById('shortenResultLink').textContent=shortUrl;
+document.getElementById('shortenResult').classList.add('show');
+showToast('✅ Link bana diya!');
+}
+function loadHome(){
+refreshUser();
+const links=getUserLinks();
+const totalClicks=links.reduce((a,l)=>a+l.clicks,0);
+const totalEarned=links.reduce((a,l)=>a+l.earned,0);
+document.getElementById('stat-links').textContent=links.length;
+document.getElementById('stat-clicks').textContent=totalClicks;
+document.getElementById('stat-earn').textContent=totalEarned.toFixed(2);
+document.getElementById('stat-refs').textContent=currentUser.refs||0;
+document.getElementById('topBalance').textContent=currentUser.balance.toFixed(2);
+const recent=links.slice(-5).reverse();
+const tbody=document.getElementById('recentLinksBody');
+if(recent.length===0){tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:24px">Pehla link banao!</td></tr>';return;}
+tbody.innerHTML=recent.map(l=>`<tr><td><span class="link-text">${BASE+'?r='+l.code}</span></td><td>${l.clicks}</td><td style="color:var(--green);font-weight:700">$${l.earned.toFixed(4)}</td><td>${l.date}</td></tr>`).join('');
+}
+function loadMyLinks(){
+refreshUser();
+const links=getUserLinks().reverse();
+document.getElementById('linksCount').textContent=links.length+' links';
+const tbody=document.getElementById('allLinksBody');
+if(links.length===0){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Koi link nahi!</td></tr>';return;}
+tbody.innerHTML=links.map(l=>`<tr><td><span class="link-text">${BASE+'?r='+l.code}</span></td><td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:0.82rem">${l.longUrl}</td><td>${l.clicks}</td><td style="color:var(--green);font-weight:700">$${l.earned.toFixed(4)}</td><td><span class="badge ${l.active?'badge-green':'badge-red'}">${l.active?'Active':'Disabled'}</span></td><td><button class="action-btn" onclick="copyText('${BASE+'?r='+l.code}')">Copy</button></td></tr>`).join('');
+}
+function loadEarnings(){
+refreshUser();
+const links=getUserLinks();
+const totalEarned=links.reduce((a,l)=>a+l.earned,0);
+const totalClicks=links.reduce((a,l)=>a+l.clicks,0);
+document.getElementById('earn-total').textContent=totalEarned.toFixed(2);
+document.getElementById('earn-available').textContent=currentUser.balance.toFixed(2);
+document.getElementById('earn-withdrawn').textContent=(currentUser.withdrawn||0).toFixed(2);
+document.getElementById('earn-clicks').textContent=totalClicks;
+const tbody=document.getElementById('earnHistoryBody');
+const linksWithClicks=links.filter(l=>l.clicks>0).reverse();
+if(linksWithClicks.length===0){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Links share karo!</td></tr>';return;}
+tbody.innerHTML=linksWithClicks.map(l=>`<tr><td>${l.date}</td><td><span class="link-text">${l.code}</span></td><td>${l.clicks}</td><td><span class="badge badge-blue">$3.00</span></td><td style="color:var(--green);font-weight:700">$${l.earned.toFixed(4)}</td></tr>`).join('');
+}
+function loadWithdraw(){refreshUser();document.getElementById('withdrawBalance').textContent=currentUser.balance.toFixed(2);}
+function doWithdraw(){
+refreshUser();
+const method=document.getElementById('payMethod').value;
+const account=document.getElementById('payAccount').value.trim();
+const amount=parseFloat(document.getElementById('payAmount').value);
+const msg=document.getElementById('withdrawMsg');
+if(!account){showMsg(msg,'Account number daalein');return;}
+if(!amount||amount<5){showMsg(msg,'Minimum $5 withdraw karein');return;}
+if(amount>currentUser.balance){showMsg(msg,'Itna balance nahi hai');return;}
+db.users[currentUser.id].balance-=amount;
+db.users[currentUser.id].withdrawn=(currentUser.withdrawn||0)+amount;
+currentUser=db.users[currentUser.id];saveDB();saveUser();
+showMsg(msg,'✅ $'+amount+' withdrawal request bhej di! '+method+' par 24 ghante mein milega.',true);
+document.getElementById('topBalance').textContent=currentUser.balance.toFixed(2);
+}
+function loadReferral(){
+refreshUser();
+const refLink=BASE+'?ref='+currentUser.refCode;
+document.getElementById('refLinkBox').textContent=refLink;
+document.getElementById('ref-count').textContent=currentUser.refs||0;
+document.getElementById('ref-earn').textContent=(currentUser.refEarn||0).toFixed(2);
+}
+function copyRef(){copyText(BASE+'?ref='+currentUser.refCode);}
+function loadProfile(){
+refreshUser();
+document.getElementById('profileName').value=currentUser.name;
+document.getElementById('profileEmail').value=currentUser.email;
+}
+function saveProfile(){
+const name=document.getElementById('profileName').value.trim();
+const pass=document.getElementById('profilePass').value;
+const msg=document.getElementById('profileMsg');
+if(!name){showMsg(msg,'Naam daalein');return;}
+db.users[currentUser.id].name=name;
+if(pass&&pass.length>=6)db.users[currentUser.id].password=pass;
+currentUser=db.users[currentUser.id];saveDB();saveUser();updateSidebar();
+showMsg(msg,'✅ Profile update ho gayi!',true);
+}
+let redirectTarget='';
+let rdTimer=null;
+function showRedirectPage(code){
+const link=db.links[code];
+if(!link){showPage('landingPage');showToast('❌ Link exist nahi karta');return;}
+redirectTarget=link.longUrl;
+showPage('redirectPage');
+document.getElementById('redirectDest').textContent=link.longUrl;
+db.links[code].clicks=(link.clicks||0)+1;
+const earn=3/1000;
+db.links[code].earned=(link.earned||0)+earn;
+db.users[link.userId].balance=(db.users[link.userId].balance||0)+earn;
+db.users[link.userId].totalEarned=(db.users[link.userId].totalEarned||0)+earn;
+saveDB();
+let sec=5;
+const numEl=document.getElementById('rdCountdown');
+const progEl=document.getElementById('rdProgress');
+const skipBtn=document.getElementById('skipBtn');
+rdTimer=setInterval(()=>{
+sec--;
+numEl.textContent=sec;
+progEl.style.width=((sec/5)*100)+'%';
+if(sec<=0){clearInterval(rdTimer);doFinalRedirect();}
+if(sec<=2)skipBtn.style.display='block';
+},1000);
+}
+function doFinalRedirect(){clearInterval(rdTimer);if(redirectTarget)window.location.href=redirectTarget;}
+function copyResult(id){copyText(document.getElementById(id).textContent);}
+function copyText(text){navigator.clipboard.writeText(text).then(()=>showToast('✅ Copy ho gaya!'));}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function showMsg(el,msg,green=false){el.textContent=msg;el.className='auth-msg show'+(green?' green':'');setTimeout(()=>el.classList.remove('show'),4000);}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('sidebarOverlay').classList.add('open');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidebarOverlay').classList.remove('open');}
+</script>
+</body>
+</html>
